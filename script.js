@@ -106,3 +106,42 @@ window.addEventListener("scroll", () => {
 document.addEventListener("DOMContentLoaded", () => {
     console.log("🚗 Site Borracharia carregado com sucesso!");
 });
+
+const slides = document.querySelectorAll('.slide');
+const bolinhas = document.querySelectorAll('.bolinha');
+
+let index = 0;
+
+function trocarSlide(i){
+
+  slides.forEach(slide => {
+    slide.classList.remove('active');
+  });
+
+  bolinhas.forEach(bolinha => {
+    bolinha.classList.remove('active');
+  });
+
+  slides[i].classList.add('active');
+  bolinhas[i].classList.add('active');
+
+  index = i;
+}
+
+bolinhas.forEach((bolinha, i) => {
+  bolinha.addEventListener('click', () => {
+    trocarSlide(i);
+  });
+});
+
+setInterval(() => {
+
+  index++;
+
+  if(index >= slides.length){
+    index = 0;
+  }
+
+  trocarSlide(index);
+
+}, 3000);
