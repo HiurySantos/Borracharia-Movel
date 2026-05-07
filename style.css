@@ -1,0 +1,705 @@
+/* =========================
+   RESET BÁSICO
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   VARIÁVEIS DE CORES
+========================= */
+:root {
+    --primary: #d60000;     /* vermelho principal */
+    --secondary: #ffcc00;   /* amarelo destaque */
+    --dark: #080808;        /* preto forte */
+    --light: #f5f5f5;       /* fundo claro */
+    --white: #ffffff;       /* branco */
+    --text: #222222;        /* texto padrão */
+    --danger: #ff2b2b;      /* vermelho alerta */
+    --gray-soft: #eaeaea;   /* cinza suave */
+}
+
+/* Rolagem suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilo geral da página */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Classe centralizadora */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* =========================
+   HEADER / MENU
+========================= */
+.header {
+    background-color: rgba(8, 8, 8, 0.96);
+    color: var(--white);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    color: var(--secondary);
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 0 rgba(214, 0, 0, 0.45);
+}
+
+/* Menu desktop */
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: var(--secondary);
+}
+
+/* Botão do menu mobile */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+
+/* =========================
+   HERO
+========================= */
+.hero {
+    background: url("../img/Borracharia-movel-fundo.png") center/cover no-repeat;
+    color: var(--white);
+    padding: 120px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Camada escura por cima da imagem */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.58),
+        rgba(0, 0, 0, 0.78)
+    );
+    z-index: 1;
+}
+
+/* Conteúdo acima da overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Selo pequeno */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(214, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    padding: 10px 18px;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    backdrop-filter: blur(4px);
+}
+
+/* bolinha pulsando */
+.pulse {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--danger);
+    display: inline-block;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.45);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.hero h2 {
+    font-size: 3.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--secondary);
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+
+.hero h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+    font-weight: 800;
+    text-shadow: 2px 2px 0 rgba(214, 0, 0, 0.45);
+}
+
+.hero p {
+    font-size: 1.12rem;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+/* Botões da hero */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+.btn {
+    border: none;
+    border-radius: 999px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff1f1f, #b30000);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(214, 0, 0, 0.28);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ff3b3b, #d10000);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(214, 0, 0, 0.38);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary);
+    color: var(--dark);
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+}
+
+.btn-large {
+    padding: 15px 35px;
+    font-size: 1.05rem;
+}
+
+
+/* =========================
+   DESTAQUES
+========================= */
+.destaque-24h {
+    background: linear-gradient(to bottom, #ffffff, #f7f7f7);
+    padding: 70px 20px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 5;
+}
+
+.destaque-24h .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.destaque-card {
+    background: linear-gradient(135deg, #ffffff, #f4f4f4);
+    border-top: 5px solid var(--primary);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s;
+}
+
+.destaque-card.apareceu {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.destaque-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.destaque-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.destaque-card p {
+    color: #555;
+}
+
+
+/* =========================
+   TÍTULOS DE SEÇÃO
+========================= */
+.section-title {
+    text-align: center;
+    font-size: 2.6rem;
+    color: var(--primary);
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 1rem;
+    font-weight: 800;
+}
+
+.section-title::after {
+    content: "";
+    width: 90px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    border-radius: 999px;
+}
+
+
+/* =========================
+   SERVIÇOS
+========================= */
+.servicos {
+    padding: 80px 20px;
+    background-color: #f2f2f2;
+}
+
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.servico-card {
+    background-color: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s;
+    border: 1px solid #eee;
+}
+
+.servico-card.apareceu {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.servico-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+}
+
+.servico-img {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a1a, var(--primary));
+    color: var(--secondary);
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.servico-card h3 {
+    color: var(--primary);
+    padding: 1.5rem 1.5rem 0.5rem;
+    font-size: 1.3rem;
+}
+
+.servico-card p {
+    padding: 0 1.5rem 1.3rem;
+    color: #666;
+}
+
+.preco {
+    display: block;
+    text-align: center;
+    background-color: #f3f3f3;
+    padding: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+
+/* =========================
+   CONTATO / ATENDIMENTO
+========================= */
+.localizacao {
+    padding: 80px 20px;
+    background-color: var(--white);
+}
+
+.localizacao-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.mapa {
+    height: 430px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background-color: #111;
+}
+
+/* importante para a imagem ocupar bem a caixa */
+.mapa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-localizacao {
+    background: #fff;
+    border-left: 5px solid var(--primary);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.info-localizacao h3 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.info-localizacao h3:first-child {
+    margin-top: 0;
+}
+
+.info-localizacao p {
+    margin-bottom: 1.2rem;
+    color: #555;
+}
+
+.info-localizacao a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.info-localizacao a:hover {
+    text-decoration: none;
+}
+
+
+/* =========================
+   CHAMADA FINAL
+========================= */
+.contato {
+    background: linear-gradient(135deg, #1a1a1a, #000000, #480000);
+    color: var(--white);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.contato h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: var(--secondary);
+    font-weight: 800;
+}
+
+.contato p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.contato-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+.footer {
+    background-color: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 3px solid var(--primary);
+}
+
+.footer p {
+    margin: 0.4rem 0;
+}
+
+
+/* =========================
+   WHATSAPP FLUTUANTE
+========================= */
+.whatsapp-float {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 68px;
+    height: 68px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    overflow: visible;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.08);
+}
+
+.whatsapp-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 50%;
+    animation: pulseWhats 1.6s infinite;
+    filter: drop-shadow(0 0 8px rgba(37, 211, 102, 0.75));
+}
+
+@keyframes pulseWhats {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(37, 211, 102, 0.8));
+    }
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.95));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(37, 211, 102, 0.8));
+    }
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/* tablets */
+@media (max-width: 992px) {
+    .destaque-24h .container {
+        grid-template-columns: 1fr;
+    }
+
+    .servicos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .localizacao-content {
+        grid-template-columns: 1fr;
+    }
+
+    .mapa {
+        height: 360px;
+    }
+}
+
+/* celular */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--dark);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 3px solid var(--primary);
+    }
+
+    .nav.active {
+        display: block;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav a {
+        display: block;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+        padding: 90px 20px;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero h3 {
+        font-size: 1.4rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .servicos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .contato-buttons {
+        flex-direction: column;
+    }
+
+    .contato-buttons .btn {
+        width: 100%;
+    }
+
+    .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        right: 18px;
+        bottom: 18px;
+    }
+}
+
+/* telas pequenas */
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .hero h2 {
+        font-size: 1.55rem;
+    }
+
+    .hero h3 {
+        font-size: 1.15rem;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+    }
+
+    .contato h2 {
+        font-size: 1.7rem;
+    }
+
+    .destaque-card,
+    .info-localizacao {
+        padding: 1.4rem;
+    }
+}
+
+/* =========================
+   AJUSTE VISUAL CONTATO
+   (SEM QUEBRAR O RESTO)
+========================= */
+
+.localizacao .btn-primary {
+    background: linear-gradient(135deg, #d60000, #7a0000);
+    color: #fff;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.localizacao .btn-primary:hover {
+    background: linear-gradient(135deg, #ff1f1f, #a00000);
+}
