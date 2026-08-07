@@ -7,7 +7,7 @@
     <title>Borracharia Móvel 24 Horas | Juninho Borracheiro</title>
 
     <meta name="description"
-        content="Borracharia móvel 24 horas em atendimento rápido para socorro com pneus, vulcanização, remendo manchão interno, venda de câmaras e serviços em geral.">
+        content="Borracharia móvel 24 horas com atendimento rápido para socorro com pneus, vulcanização, remendo manchão interno, venda de câmaras e serviços em geral.">
     <meta name="keywords"
         content="borracharia móvel, borracharia 24 horas, socorro pneu, vulcanização, remendo de pneu, câmara de moto, câmara de carro, Juninho Borracheiro">
     <meta name="author" content="Juninho Borracheiro">
@@ -41,7 +41,7 @@
                 </div>
 
                 <!-- Menu principal -->
-                <nav class="nav">
+                <nav class="nav" id="mainNavigation">
                     <ul>
                         <li><a href="#home">Início</a></li>
                         <li><a href="#socorro">Socorro 24h</a></li>
@@ -51,7 +51,8 @@
                 </nav>
 
                 <!-- Botão do menu mobile -->
-                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu"
+                    aria-expanded="false" aria-controls="mainNavigation">
                     ☰
                 </button>
             </div>
@@ -135,35 +136,55 @@
 
         </div>
     </section>
-        <section>
-        <div class="slider">
+    <section aria-label="Galeria de atendimentos">
+        <div class="slider" role="region" aria-roledescription="carrossel"
+            aria-label="Fotos dos serviços realizados" tabindex="0">
 
-            <div class="slide active">
-                <img src="img/WhatsApp Image 2026-04-17 at 08.49.44.jpeg" alt="Foto 1">
+            <div class="slide active" role="group" aria-roledescription="slide" aria-label="1 de 5"
+                aria-hidden="false">
+                <img src="img/WhatsApp Image 2026-04-17 at 08.49.44.jpeg"
+                    alt="Borracheiro reparando o pneu de uma motocicleta durante atendimento noturno">
             </div>
 
-            <div class="slide">
-                <img src="img/1.jpeg" alt="Foto 2">
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 5" aria-hidden="true">
+                <img src="img/1.jpeg"
+                    alt="Borracheiro trabalhando em uma roda de motocicleta ao lado do veículo de atendimento">
             </div>
 
-            <div class="slide">
-                <img src="img/WhatsApp Image 2026-04-17 at 08.49.33.jpeg" alt="Foto 3">
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 5" aria-hidden="true">
+                <img src="img/WhatsApp Image 2026-04-17 at 08.49.33.jpeg"
+                    alt="Câmara de pneu com remendo interno aplicado">
             </div>
 
-            <div class="slide">
-                <img src="img/WhatsApp Image 2026-04-17 at 08.49.40.jpeg" alt="Foto 4">
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="4 de 5" aria-hidden="true">
+                <img src="img/WhatsApp Image 2026-04-17 at 08.49.40.jpeg"
+                    alt="Pneu em primeiro plano diante de pilhas de pneus armazenados">
             </div>
 
-            <div class="slide">
-                <img src="img/WhatsApp Image 20216-04-17 at 08.49.44.jpeg" alt="Foto 5">
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="5 de 5" aria-hidden="true">
+                <img src="img/WhatsApp Image 20216-04-17 at 08.49.44.jpeg"
+                    alt="Borracheiro trocando o pneu de um automóvel durante atendimento noturno">
             </div>
 
-            <div class="bolinhas">
-                <span class="bolinha active"></span>
-                <span class="bolinha"></span>
-                <span class="bolinha"></span>
-                <span class="bolinha"></span>
-                <span class="bolinha"></span>
+            <div class="slider-controls" aria-label="Controles do carrossel">
+                <button class="slider-control slider-prev" type="button"
+                    aria-label="Mostrar slide anterior">&#10094;</button>
+                <button class="slider-control slider-next" type="button"
+                    aria-label="Mostrar próximo slide">&#10095;</button>
+            </div>
+
+            <div class="slider-footer">
+                <button class="slider-pause" type="button" aria-label="Pausar carrossel"
+                    aria-pressed="false">&#10074;&#10074;</button>
+
+                <div class="bolinhas" aria-label="Selecionar slide">
+                    <button class="bolinha active" type="button" aria-label="Mostrar slide 1 de 5"
+                        aria-current="true"></button>
+                    <button class="bolinha" type="button" aria-label="Mostrar slide 2 de 5"></button>
+                    <button class="bolinha" type="button" aria-label="Mostrar slide 3 de 5"></button>
+                    <button class="bolinha" type="button" aria-label="Mostrar slide 4 de 5"></button>
+                    <button class="bolinha" type="button" aria-label="Mostrar slide 5 de 5"></button>
+                </div>
             </div>
 
         </div>
@@ -207,7 +228,7 @@
 
                 <div class="servico-card">
                     <div class="servico-img">🛠️</div>
-                    <h3>Serviços em Gerais</h3>
+                    <h3>Serviços em geral</h3>
                     <p>
                         Soluções rápidas para pneus e apoio em diferentes
                         necessidades do atendimento automotivo.
@@ -244,13 +265,13 @@
                     <h3>📞 Telefones</h3>
                     <p>
                         <strong>Júnior:</strong>
-                        <a href="https://wa.me/5527999099258" target="_blank">
+                        <a href="https://wa.me/5527999099258" target="_blank" rel="noopener noreferrer">
                             (27) 9 9909-9258
                         </a>
                         <br><br>
 
                         <strong>Miguel:</strong>
-                        <a href="https://wa.me/5527998001790" target="_blank">
+                        <a href="https://wa.me/5527998001790" target="_blank" rel="noopener noreferrer">
                             (27) 9 9800-1790
                         </a>
                     </p>
@@ -261,7 +282,8 @@
                         com agilidade no socorro e nos serviços prestados.
                     </p>
 
-                    <a href="https://wa.me/5527999099258" class="btn btn-primary btn-full" target="_blank">
+                    <a href="https://wa.me/5527999099258" class="btn btn-primary btn-full" target="_blank"
+                        rel="noopener noreferrer">
                         💬 Pedir socorro agora
                     </a>
                 </div>
@@ -303,7 +325,8 @@
          BOTÃO FLUTUANTE WHATSAPP
          Troque o nome da imagem se necessário
     ========================== -->
-    <a href="https://wa.me/5527999099258" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+    <a href="https://wa.me/5527999099258" class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+        title="Fale conosco no WhatsApp">
         <img src="img/whatsapp.png" alt="WhatsApp">
     </a>
 
