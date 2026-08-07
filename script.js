@@ -22,14 +22,26 @@ const menuToggle = document.getElementById("menuToggle");
 const nav = document.querySelector(".nav");
 
 if (menuToggle && nav) {
+    const fecharMenu = (devolverFoco = false) => {
+        nav.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+
+        if (devolverFoco) {
+            menuToggle.focus();
+        }
+    };
+
     menuToggle.addEventListener("click", () => {
-        nav.classList.toggle("active");
+        const menuAberto = nav.classList.toggle("active");
+        menuToggle.setAttribute("aria-expanded", String(menuAberto));
+        menuToggle.setAttribute("aria-label", menuAberto ? "Fechar menu" : "Abrir menu");
     });
 
     // Fecha menu ao clicar em link
     document.querySelectorAll(".nav a").forEach((link) => {
         link.addEventListener("click", () => {
-            nav.classList.remove("active");
+            fecharMenu();
         });
     });
 
@@ -39,7 +51,13 @@ if (menuToggle && nav) {
         const clicouNoBotao = menuToggle.contains(e.target);
 
         if (!clicouNoMenu && !clicouNoBotao) {
-            nav.classList.remove("active");
+            fecharMenu();
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && nav.classList.contains("active")) {
+            fecharMenu(true);
         }
     });
 }
@@ -100,48 +118,122 @@ window.addEventListener("scroll", () => {
 });
 
 
-// =========================
-// DEBUG
-// =========================
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("🚗 Site Borracharia carregado com sucesso!");
-});
-
 const slides = document.querySelectorAll('.slide');
 const bolinhas = document.querySelectorAll('.bolinha');
+const slider = document.querySelector('.slider');
+const botaoAnterior = document.querySelector('.slider-prev');
+const botaoProximo = document.querySelector('.slider-next');
+const botaoPausa = document.querySelector('.slider-pause');
+const preferenciaMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)');
+const TEMPO_ROTACAO_AUTOMATICA = 3000;
 
-let index = 0;
+let indiceSlideAtual = 0;
+let idRotacaoAutomatica = null;
+let pausaSolicitada = false;
+let paginaOculta = document.hidden;
 
-function trocarSlide(i){
+const carrosselValido = slides.length > 0 && slides.length === bolinhas.length;
 
-  slides.forEach(slide => {
-    slide.classList.remove('active');
+function exibirSlide(indice) {
+  if (!carrosselValido) return;
+
+  const indiceNormalizado = (indice + slides.length) % slides.length;
+
+  slides.forEach((slide, slideIndex) => {
+    const ativo = slideIndex === indiceNormalizado;
+    slide.classList.toggle('active', ativo);
+    slide.setAttribute('aria-hidden', String(!ativo));
   });
 
-  bolinhas.forEach(bolinha => {
-    bolinha.classList.remove('active');
+  bolinhas.forEach((bolinha, bolinhaIndex) => {
+    const ativo = bolinhaIndex === indiceNormalizado;
+    bolinha.classList.toggle('active', ativo);
+
+    if (ativo) {
+      bolinha.setAttribute('aria-current', 'true');
+    } else {
+      bolinha.removeAttribute('aria-current');
+    }
   });
 
-  slides[i].classList.add('active');
-  bolinhas[i].classList.add('active');
-
-  index = i;
+  indiceSlideAtual = indiceNormalizado;
 }
 
-bolinhas.forEach((bolinha, i) => {
-  bolinha.addEventListener('click', () => {
-    trocarSlide(i);
-  });
-});
+function devePausarCarrossel() {
+  return pausaSolicitada || paginaOculta || preferenciaMovimentoReduzido.matches;
+}
 
-setInterval(() => {
-
-  index++;
-
-  if(index >= slides.length){
-    index = 0;
+function pararRotacaoAutomatica() {
+  if (idRotacaoAutomatica !== null) {
+    window.clearInterval(idRotacaoAutomatica);
+    idRotacaoAutomatica = null;
   }
+}
 
-  trocarSlide(index);
+function reiniciarRotacaoAutomatica() {
+  pararRotacaoAutomatica();
 
-}, 3000);
+  if (!carrosselValido || devePausarCarrossel()) return;
+
+  idRotacaoAutomatica = window.setInterval(() => {
+    exibirSlide(indiceSlideAtual + 1);
+  }, TEMPO_ROTACAO_AUTOMATICA);
+}
+
+function atualizarControlePausa() {
+  if (!botaoPausa) return;
+
+  const movimentoReduzido = preferenciaMovimentoReduzido.matches;
+  const carrosselPausado = pausaSolicitada || movimentoReduzido;
+
+  botaoPausa.disabled = movimentoReduzido;
+  botaoPausa.setAttribute('aria-pressed', String(carrosselPausado));
+  botaoPausa.setAttribute('aria-label', carrosselPausado ? 'Continuar carrossel' : 'Pausar carrossel');
+  botaoPausa.textContent = carrosselPausado ? '▶' : '❚❚';
+}
+
+function atualizarRotacaoAutomatica() {
+  atualizarControlePausa();
+  reiniciarRotacaoAutomatica();
+}
+
+function navegarParaSlide(indice) {
+  exibirSlide(indice);
+  reiniciarRotacaoAutomatica();
+}
+
+if (carrosselValido && slider) {
+  exibirSlide(indiceSlideAtual);
+
+  botaoAnterior?.addEventListener('click', () => navegarParaSlide(indiceSlideAtual - 1));
+  botaoProximo?.addEventListener('click', () => navegarParaSlide(indiceSlideAtual + 1));
+
+  bolinhas.forEach((bolinha, indice) => {
+    bolinha.addEventListener('click', () => navegarParaSlide(indice));
+  });
+
+  botaoPausa?.addEventListener('click', () => {
+    pausaSolicitada = !pausaSolicitada;
+    atualizarRotacaoAutomatica();
+  });
+
+  slider.addEventListener('keydown', (evento) => {
+    if (evento.key === 'ArrowLeft') {
+      evento.preventDefault();
+      navegarParaSlide(indiceSlideAtual - 1);
+    } else if (evento.key === 'ArrowRight') {
+      evento.preventDefault();
+      navegarParaSlide(indiceSlideAtual + 1);
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    paginaOculta = document.hidden;
+    atualizarRotacaoAutomatica();
+  });
+
+  preferenciaMovimentoReduzido.addEventListener('change', atualizarRotacaoAutomatica);
+  atualizarRotacaoAutomatica();
+} else {
+  pararRotacaoAutomatica();
+}
